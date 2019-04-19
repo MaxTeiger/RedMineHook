@@ -1,6 +1,5 @@
 #!/home/coopengo/.local/lib/python2.7
 import config
-import pprint
 #import library to use Redmine API
 from redminelib import Redmine
 
