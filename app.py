@@ -39,7 +39,7 @@ def testFlask():
         signature = request.headers.get('X-Hub-Signature')
         print("Signature received : " + str(signature))
         
-        
+        # data used to hash values 
         data = request.data
 
 
@@ -52,26 +52,36 @@ def testFlask():
             if content['pull_request']['body'] != "":
                 pullBody = content['pull_request']['body']
             else:
-                pullBody = "Nothing specified #123456789"
+                pullBody = "Not for a ticket"
 
             print("Pull URL : " +str(pullURL))
-            print("Pull Body (must contain #fixnumber):" +str(pullBody))
+            print("Pull Body (must contain \"Fix #fixnumber\"):" +str(pullBody))
 
             # We call the webscrapping function which retrieve the fix number of the pull request 
-            return redmine_api.updateIssueOnRedMineFromGit(pullBody, pullURL)
+            messageReturned = redmine_api.updateIssueOnRedMineFromGit(pullBody, pullURL)
+
+            if messageReturned == "Ticket not updated (not a fix pull request)":
+                return messageReturned, status.HTTP_400_BAD_REQUEST
+            elif messageReturned == "Ok":
+                return messageReturned, status.HTTP_200_OK
+            elif messageReturned == "Ticket deleted":
+                return messageReturned, status.HTTP_404_NOT_FOUND
         
         else: 
             print("Well yes, but no")
             return "Well yes, but no", status.HTTP_403_FORBIDDEN
 
+
+
+
+
     # If going on this route directly through the browser 
     elif request.method == 'GET':
         return 'Hello World! (sorry you are probably on a wrong route)'
 
-# # If you want to change default port number enable this line 
-# app.run(host='0.0.0.0', port= 5000)
 
 if __name__ == '__main__':
+
     # Debug/Development
     # app.run(debug=True, host="0.0.0.0", port="5000")
 
