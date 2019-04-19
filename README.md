@@ -12,11 +12,11 @@
 * Choose the activation mode on "Pull request".
 * Save the webhook
 
-### In config.py file
+### In conf.txt file
 
-* Change SECRET_TOKEN to your **secret key**
-* Change REDMINE_API_KEY to your **redmine api key**
-* Change REDMINE_URL to your **RedMine URL desposit**
+* Change SECRET TOKEN to your **secret key**
+* Change REDMINE API KEY to your **redmine api key**
+* Change REDMINE URL to your **RedMine desposit URL**
 
 ### On your server
 You just have to run :
@@ -37,3 +37,13 @@ Maybe a next version that will change the RedMine status to :
 | New Pull Request              | En revue                    |
 | Pull request closed           | A traiter                   |
 | Merge pull request            | Traité                      |
+
+#### Notes :
+
+Pull body must have the form : 
+> What you want ... Fix [...] #fixnumber [...]
+
+Ticket is not updated if it is "rejected" (Rejeté).
+If path problems to conf.txt occurs in the container, contact me. 
+
+----
