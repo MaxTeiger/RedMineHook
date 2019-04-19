@@ -17,7 +17,8 @@ RUN pip install flask_api
 
 ADD app.py /home/app.py
 ADD redmine_api.py /home/redmine_api.py
-ADD config.py /home/config.py
+#ADD config.py /home/config.py
+ADD conf.txt /home/conf.txt
 
 WORKDIR /home
 

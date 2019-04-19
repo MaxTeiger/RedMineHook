@@ -1,21 +1,32 @@
 import redmine_api
-import config
+import ConfigParser
 from flask import Flask, request
 from flask_restful import Resource, Api
 from gevent.pywsgi import WSGIServer
 from flask_api import status
 import hmac
 import hashlib
+import os
 
 app = Flask(__name__)
 api = Api(app)
 
 print("app.py found !")
+configParser = ConfigParser.RawConfigParser() 
+
+
+thisfolder = os.path.dirname(os.path.abspath(__file__))
+initfile = os.path.join(thisfolder, 'conf.txt')
+
+configParser.read(initfile)
+
+SECRET_TOKEN = configParser.get('GitHub', 'secret')
+
 
 #Compare the HMAC hash signature
 def verify_hmac_hash(data, signature):
 
-    GitHub_secret = bytes(config.SECRET_TOKEN.encode('UTF-8'))
+    GitHub_secret = bytes(SECRET_TOKEN.encode('UTF-8'))
     mac = hmac.new(GitHub_secret, msg=data, digestmod=hashlib.sha1)
     mysignature = "sha1=" +str(mac.hexdigest())
     print("My signature :" +mysignature)

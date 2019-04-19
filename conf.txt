@@ -1,0 +1,17 @@
+[RedMine]
+url = https://yourredminedepo.com
+apikey = yourapikey
+a_traiter = 1
+en_cours = 2
+traite = 3
+en_attente_client = 4
+valide = 5 
+rejete = 6
+en_revue = 7
+en_validation_client = 10
+
+[GitHub]
+secret = yoursecret
+
+
+
