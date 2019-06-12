@@ -19,7 +19,7 @@ Once it's done, you must have a new folder called **RedMineHook**
 * Create new webhook
 * Add the address of the server on which the application will run with "/payload" at the end
 > It should look like https://myserveraddress/payload
-
+* select json format
 * Add a **secret key** for the security of the application (upper case, lower case, numbers...). Please note this key, we will use it later
 * Select Let me select individual events > Choose the activation mode on "Pull request".
 * Save the webhook
