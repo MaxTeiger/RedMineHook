@@ -1,9 +1,13 @@
 version: '2'
 services:
     web:
-        build: .
-        image: redmine_github_sync
+        build: . 
+        image: hook-redmine
+        container_name: hook-redmine
         ports:
             - "5000:5000"
+        volumes:
+            - ${PWD}/conf.txt:/home/conf.txt
+
 
 
